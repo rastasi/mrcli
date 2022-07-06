@@ -2,10 +2,15 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"mrcli/commands"
+	"mrcli/utils"
 )
 
 func main() {
+	metadata := utils.GetMetadata()
+	fmt.Printf("%s %s\n\n", metadata.ProjectName, metadata.Version)
+
 	var mrCmd string
 	flag.StringVar(&mrCmd, "init", "", "Initialize monorepository")
 
@@ -31,4 +36,6 @@ func main() {
 		commands.Library(libCmd)
 		return
 	}
+
+	commands.Help()
 }
