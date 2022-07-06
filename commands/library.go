@@ -1,13 +1,10 @@
 package commands
 
-import (
-	"mrcli/layout"
-	"mrcli/utils"
-)
+import "mrcli/lib"
 
 func Library(name string) {
-	layout.LogSuccess(name, "Initialize application\n", []any{})
+	lib.LogSuccess(name, "Initialize application\n", []any{})
 
-	utils.CreateDir("libs/" + name)
-	utils.CreateGoWorkFile(name, "./libs/"+name)
+	lib.CreateDir("libs/" + name)
+	lib.CreateGoWorkFile(name, "./libs/"+name)
 }

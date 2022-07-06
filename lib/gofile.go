@@ -1,4 +1,4 @@
-package utils
+package lib
 
 func CreateGoModFile(name string) {
 	ExecuteCommand(name, name, "go", []string{"mod", "init", name})

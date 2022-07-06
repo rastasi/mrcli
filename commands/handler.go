@@ -1,8 +1,8 @@
-package commandhandler
+package commands
 
 import (
 	"flag"
-	"mrcli/layout"
+	"mrcli/lib"
 )
 
 func setFlags(commandProperties []commandProperty) {
@@ -14,6 +14,9 @@ func setFlags(commandProperties []commandProperty) {
 func handle(commandProperties []commandProperty) bool {
 	for _, c := range commandProperties {
 		if c.Value != "" {
+			if c.InProjectDir && !lib.CheckConfigFile() {
+				panic("Config file not found or incorrect")
+			}
 			c.Handler(c.Value)
 			return true
 		}
@@ -23,7 +26,7 @@ func handle(commandProperties []commandProperty) bool {
 
 func help() {
 	flag.VisitAll(func(f *flag.Flag) {
-		layout.Log("", "%s: %s\n", []any{f.Name, f.Usage})
+		lib.Log("", "%s: %s\n", []any{f.Name, f.Usage})
 	})
 }
 

@@ -1,4 +1,4 @@
-package metadata
+package lib
 
 import (
 	"io/ioutil"
@@ -22,4 +22,23 @@ func CreateConfigFile(name string) {
 
 	path := name + "/project.yaml"
 	ioutil.WriteFile(path, configData, 0644)
+}
+
+func LoadConfigFile() Configfile {
+	fileData, _ := ioutil.ReadFile("./project.yaml")
+	var config Configfile
+	yaml.Unmarshal(fileData, &config)
+	return config
+}
+
+func CheckConfigFile() bool {
+	if FileExists("./project.yaml") {
+		config := LoadConfigFile()
+		metadata := GetMetadata()
+		if config.Type == metadata.ProjectName {
+			return true
+		}
+		return false
+	}
+	return false
 }

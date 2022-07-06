@@ -1,11 +1,11 @@
 package main
 
 import (
-	"mrcli/commandhandler"
-	"mrcli/layout"
+	"mrcli/commands"
+	"mrcli/lib"
 )
 
 func main() {
-	layout.Header()
-	commandhandler.CommandHandler()
+	lib.Header()
+	commands.CommandHandler()
 }

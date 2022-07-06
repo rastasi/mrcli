@@ -1,16 +1,12 @@
 package commands
 
-import (
-	"mrcli/layout"
-	"mrcli/metadata"
-	"mrcli/utils"
-)
+import "mrcli/lib"
 
 func Initialize(name string) {
-	layout.LogSuccess(name, "Initialize monorepository\n", []any{})
-	utils.CreateDir("./" + name)
-	utils.CreateDir("./" + name + "/apps")
-	utils.CreateDir("./" + name + "/libs")
-	metadata.CreateConfigFile(name)
-	utils.CreateGoModFile(name)
+	lib.LogSuccess(name, "Initialize monorepository\n", []any{})
+	lib.CreateDir("./" + name)
+	lib.CreateDir("./" + name + "/apps")
+	lib.CreateDir("./" + name + "/libs")
+	lib.CreateConfigFile(name)
+	lib.CreateGoModFile(name)
 }
