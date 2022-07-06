@@ -19,7 +19,7 @@ func exists(path string) bool {
 	return false
 }
 
-func executeCommand(name string, subdir string, command string, args []string) {
+func ExecuteCommand(name string, subdir string, command string, args []string) {
 	cmd := exec.Command(command, args...)
 	cmd.Dir = subdir
 	err := cmd.Run()
