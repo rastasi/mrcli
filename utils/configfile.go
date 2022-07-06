@@ -14,10 +14,10 @@ type Configfile struct {
 }
 
 func CreateConfigfile(name string) {
-
+	metadata := GetMetadata()
 	configData, err := yaml.Marshal(Configfile{
-		Type:    "mrcli",
-		Version: "1.0",
+		Type:    metadata.ProjectName,
+		Version: metadata.Version,
 		Name:    name,
 	})
 
