@@ -8,7 +8,6 @@ import (
 
 func exists(path string) bool {
 	_, err := os.Stat(path)
-	fmt.Println(err)
 	if err == nil {
 		return true
 	}
