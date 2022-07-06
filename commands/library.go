@@ -1,12 +1,12 @@
 package commands
 
 import (
-	"fmt"
 	"mrcli/utils"
 )
 
 func Library(name string) {
-	fmt.Printf("Initialize application: %s\n", name)
+	utils.LogSuccess(name, "Initialize application\n", []any{})
+
 	utils.CreateDir("libs/" + name)
 	utils.CreateGoWorkFile(name, "./libs/"+name)
 }

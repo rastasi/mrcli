@@ -1,12 +1,11 @@
 package commands
 
 import (
-	"fmt"
 	"mrcli/utils"
 )
 
 func Initialize(name string) {
-	fmt.Println("Initialize monorepository")
+	utils.LogSuccess(name, "Initialize monorepository\n", []any{})
 	utils.CreateDir("./" + name)
 	utils.CreateDir("./" + name + "/apps")
 	utils.CreateDir("./" + name + "/libs")

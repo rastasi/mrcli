@@ -25,17 +25,17 @@ func executeCommand(name string, subdir string, command string, args []string) {
 	err := cmd.Run()
 	fmt.Printf("Execute command: \"%s %s\" in \"%s\"\n", command, strings.Join(args, " "), subdir)
 	if err != nil {
-		fmt.Println(err)
+		LogFail(name, err.Error()+"\n", []any{})
 	}
 }
 
 func CreateDir(name string) {
 	if !exists(name) {
 		permission := 0766
-		fmt.Println("Create directory: " + name)
+		LogSuccess(name, "Create directory\n", []any{})
 		os.Mkdir(name, fs.FileMode(permission))
 	} else {
-		fmt.Println("Directory already exists: " + name)
+		LogFail(name, "Directory already exists\n", []any{})
 	}
 }
 

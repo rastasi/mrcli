@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"io/ioutil"
 
 	"gopkg.in/yaml.v2"
@@ -22,7 +21,8 @@ func CreateConfigFile(name string) {
 	})
 
 	if err != nil {
-		fmt.Printf("Error while Marshaling. %v", err)
+		LogFail(name, "Error while Marshaling. %v\n", []any{err})
+
 	}
 
 	path := name + "/project.yaml"
