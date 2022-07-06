@@ -3,26 +3,35 @@ package commandhandler
 import (
 	"flag"
 	"fmt"
-	"mrcli/commands"
 )
+
+func setFlags(commandProperties []commandProperty) {
+	for i, _ := range commandProperties {
+		flag.StringVar(&commandProperties[i].Value, commandProperties[i].Id, "", commandProperties[i].Description)
+	}
+}
+
+func handle(commandProperties []commandProperty) bool {
+	for _, c := range commandProperties {
+		if c.Value != "" {
+			c.Handler(c.Value)
+			return true
+		}
+	}
+	return false
+}
+
+func help() {
+	flag.VisitAll(func(f *flag.Flag) {
+		fmt.Printf("%s: %s\n", f.Name, f.Usage)
+	})
+}
 
 func CommandHandler() {
 	commandProperties := GetCommandProperties()
-
-	for i, _ := range commandProperties {
-		fmt.Println(commandProperties[i].Id)
-		flag.StringVar(&commandProperties[i].Value, commandProperties[i].Id, "", commandProperties[i].Description)
-	}
-
+	setFlags(commandProperties)
 	flag.Parse()
-
-	for _, c := range commandProperties {
-		fmt.Println(c.Value)
-		if c.Value != "" {
-			c.Handler(c.Value)
-			return
-		}
+	if !handle(commandProperties) {
+		help()
 	}
-
-	commands.Help()
 }

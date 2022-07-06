@@ -18,12 +18,12 @@ func GetCommandProperties() []commandProperty {
 		},
 		{
 			Id:          "app",
-			Description: "Initialize application",
+			Description: "Create application",
 			Handler:     commands.Application,
 		},
 		{
 			Id:          "lib",
-			Description: "Initialize library",
+			Description: "Create library",
 			Handler:     commands.Library,
 		},
 	}
