@@ -1,6 +1,10 @@
-package utils
+package layout
+
+import (
+	"mrcli/metadata"
+)
 
 func Header() {
-	metadata := GetMetadata()
+	metadata := metadata.GetMetadata()
 	Log("", "%s %s\n\n", []any{metadata.ProjectName, metadata.Version})
 }

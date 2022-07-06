@@ -1,4 +1,4 @@
-package utils
+package metadata
 
 import (
 	"io/ioutil"
@@ -14,22 +14,12 @@ type Configfile struct {
 
 func CreateConfigFile(name string) {
 	metadata := GetMetadata()
-	configData, err := yaml.Marshal(Configfile{
+	configData, _ := yaml.Marshal(Configfile{
 		Type:    metadata.ProjectName,
 		Version: metadata.Version,
 		Name:    name,
 	})
 
-	if err != nil {
-		LogFail(name, "Error while Marshaling. %v\n", []any{err})
-
-	}
-
 	path := name + "/project.yaml"
-
-	err = ioutil.WriteFile(path, configData, 0644)
-
-	if err != nil {
-		panic("Unable to write data into the file")
-	}
+	ioutil.WriteFile(path, configData, 0644)
 }

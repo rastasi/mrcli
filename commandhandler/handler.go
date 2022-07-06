@@ -2,7 +2,7 @@ package commandhandler
 
 import (
 	"flag"
-	"mrcli/utils"
+	"mrcli/layout"
 )
 
 func setFlags(commandProperties []commandProperty) {
@@ -23,7 +23,7 @@ func handle(commandProperties []commandProperty) bool {
 
 func help() {
 	flag.VisitAll(func(f *flag.Flag) {
-		utils.Log("", "%s: %s\n", []any{f.Name, f.Usage})
+		layout.Log("", "%s: %s\n", []any{f.Name, f.Usage})
 	})
 }
 
