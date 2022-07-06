@@ -10,5 +10,6 @@ func Initialize(name string) {
 	utils.CreateDir("./" + name)
 	utils.CreateDir("./" + name + "/apps")
 	utils.CreateDir("./" + name + "/libs")
-	utils.CreateConfigfile(name)
+	utils.CreateConfigFile(name)
+	utils.CreateGoModFile(name)
 }

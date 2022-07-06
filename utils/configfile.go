@@ -13,7 +13,7 @@ type Configfile struct {
 	Name    string `yaml:"name"`
 }
 
-func CreateConfigfile(name string) {
+func CreateConfigFile(name string) {
 	metadata := GetMetadata()
 	configData, err := yaml.Marshal(Configfile{
 		Type:    metadata.ProjectName,
