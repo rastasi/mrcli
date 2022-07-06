@@ -1,4 +1,17 @@
 # mrcli
+
+## Installion
+
+```
+curl -o- https://raw.githubusercontent.com/rastasi/mrcli/master/install.sh | sh
+```
+
+```
+wget -qO- https://raw.githubusercontent.com/rastasi/mrcli/master/install.sh | sh
+```
+
+## Commands
+
 Monorepository CLI for Golang
 
 Create new monorepository:
