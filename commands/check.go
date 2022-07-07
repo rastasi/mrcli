@@ -3,7 +3,7 @@ package commands
 import "mrcli/lib"
 
 func checkBaseDirs(name string) {
-	lib.Log(name, "Base directories\n", []any{})
+	lib.Log(name, "Base directories")
 	lib.FileExistsDisplayBulk([]string{
 		name + "/project.yaml",
 		name + "/apps",
@@ -14,26 +14,26 @@ func checkBaseDirs(name string) {
 
 func checkConfigFileNilDisplay(propertyName, property string) {
 	if len(property) != 0 {
-		lib.LogSuccess(propertyName, "Property is filled\n", []any{})
+		lib.LogSuccess(propertyName, "Property is filled")
 	} else {
-		lib.LogFail(propertyName, "Property is missing\n", []any{})
+		lib.LogFail(propertyName, "Property is missing")
 	}
 }
 
 func checkConfigFileFormat(name string) {
-	lib.Log(name, "Config file properties\n", []any{})
+	lib.Log(name, "Config file properties\n")
 	if lib.CheckConfigFile(name) {
 		config := lib.LoadConfigFile(name)
 		checkConfigFileNilDisplay("Name", config.Name)
 		checkConfigFileNilDisplay("Type", config.Type)
 		checkConfigFileNilDisplay("Version", config.Version)
 	} else {
-		lib.Log(name, "Config file not found or incorrect", []any{})
+		lib.Log(name, "Config file not found or incorrect")
 	}
 }
 
 func Check(name string) {
-	lib.Log(name, "Check %s\n", []any{name})
+	lib.Log(name, "Check %s\n", name)
 	checkBaseDirs(name)
 	checkConfigFileFormat(name)
 }

@@ -7,26 +7,24 @@ import (
 )
 
 func formatLog(name string, message string) string {
-	var formatted string
 	if len(name) == 0 {
-		formatted = fmt.Sprintf("%s", message)
+		return fmt.Sprintf("%s\n", message)
 	} else {
-		formatted = fmt.Sprintf("[%s] %s", name, message)
+		return fmt.Sprintf("[%s] %s\n", name, message)
 	}
-	return formatted
 }
 
-func Log(name string, message string, args []any) {
+func Log(name string, message string, args ...any) {
 	formatted := formatLog(name, message)
 	fmt.Printf(formatted, args...)
 }
 
-func LogSuccess(name string, message string, args []any) {
+func LogSuccess(name string, message string, args ...any) {
 	formatted := formatLog(name, message)
 	color.New(color.FgGreen).Printf(formatted, args...)
 }
 
-func LogFail(name string, message string, args []any) {
+func LogFail(name string, message string, args ...any) {
 	formatted := formatLog(name, message)
 	color.New(color.FgRed).Printf(formatted, args...)
 }

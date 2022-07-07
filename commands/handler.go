@@ -26,7 +26,7 @@ func handle(commandProperties []commandProperty) bool {
 
 func help() {
 	flag.VisitAll(func(f *flag.Flag) {
-		lib.Log("", "%s: %s\n", []any{f.Name, f.Usage})
+		lib.Log("", "%s: %s\n", f.Name, f.Usage)
 	})
 }
 
