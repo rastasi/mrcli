@@ -14,7 +14,7 @@ func setFlags(commandProperties []commandProperty) {
 func handle(commandProperties []commandProperty) bool {
 	for _, c := range commandProperties {
 		if c.Value != "" {
-			if c.InProjectDir && !lib.CheckConfigFile() {
+			if c.checkConfigFile && !lib.CheckConfigFile(".") {
 				panic("Config file not found or incorrect")
 			}
 			c.Handler(c.Value)

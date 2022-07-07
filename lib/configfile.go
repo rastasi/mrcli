@@ -24,16 +24,16 @@ func CreateConfigFile(name string) {
 	ioutil.WriteFile(path, configData, 0644)
 }
 
-func LoadConfigFile() Configfile {
-	fileData, _ := ioutil.ReadFile("./project.yaml")
+func LoadConfigFile(name string) Configfile {
+	fileData, _ := ioutil.ReadFile(name + "/project.yaml")
 	var config Configfile
 	yaml.Unmarshal(fileData, &config)
 	return config
 }
 
-func CheckConfigFile() bool {
-	if FileExists("./project.yaml") {
-		config := LoadConfigFile()
+func CheckConfigFile(name string) bool {
+	if FileExists(name + "/project.yaml") {
+		config := LoadConfigFile(name)
 		metadata := GetMetadata()
 		if config.Type == metadata.ProjectName {
 			return true

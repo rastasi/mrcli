@@ -4,9 +4,13 @@ import "mrcli/lib"
 
 func Initialize(name string) {
 	lib.LogSuccess(name, "Initialize monorepository\n", []any{})
-	lib.CreateDir("./" + name)
-	lib.CreateDir("./" + name + "/apps")
-	lib.CreateDir("./" + name + "/libs")
+	lib.CreateDirBulk([]string{
+		"./" + name,
+		"./" + name + "/apps",
+		"./" + name + "/libs",
+		"./" + name + "/dists",
+	})
 	lib.CreateConfigFile(name)
 	lib.CreateGoModFile(name)
+	lib.CreateGitRepo((name))
 }

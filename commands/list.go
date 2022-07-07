@@ -1,11 +1,11 @@
 package commands
 
 type commandProperty struct {
-	Id           string
-	Description  string
-	Handler      func(name string)
-	Value        string
-	InProjectDir bool
+	Id              string
+	Description     string
+	Handler         func(name string)
+	Value           string
+	checkConfigFile bool
 }
 
 func GetCommandProperties() []commandProperty {
@@ -16,22 +16,28 @@ func GetCommandProperties() []commandProperty {
 			Handler:     Initialize,
 		},
 		{
-			Id:           "app",
-			Description:  "Create application",
-			Handler:      Application,
-			InProjectDir: true,
+			Id:              "app",
+			Description:     "Create application",
+			Handler:         Application,
+			checkConfigFile: true,
 		},
 		{
-			Id:           "lib",
-			Description:  "Create library",
-			Handler:      Library,
-			InProjectDir: true,
+			Id:              "lib",
+			Description:     "Create library",
+			Handler:         Library,
+			checkConfigFile: true,
 		},
 		{
-			Id:           "build",
-			Description:  "Build application",
-			Handler:      Build,
-			InProjectDir: true,
+			Id:              "build",
+			Description:     "Build application",
+			Handler:         Build,
+			checkConfigFile: true,
+		},
+		{
+			Id:              "check",
+			Description:     "Check monorepository structure",
+			Handler:         Check,
+			checkConfigFile: false,
 		},
 	}
 }
