@@ -16,7 +16,7 @@ type Configfile struct {
 func CreateConfigFile(name string) {
 	metadata := GetMetadata()
 	configData, _ := yaml.Marshal(Configfile{
-		Type:    metadata.ProjectName,
+		Type:    metadata.Name,
 		Version: metadata.Version,
 		Name:    name,
 	})
@@ -36,7 +36,7 @@ func CheckConfigFile(name string) bool {
 	if filemanager.FileExists(name + "/project.yaml") {
 		config := LoadConfigFile(name)
 		metadata := GetMetadata()
-		if config.Type == metadata.ProjectName {
+		if config.Type == metadata.Name {
 			return true
 		}
 		return false
