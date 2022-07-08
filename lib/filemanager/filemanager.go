@@ -1,7 +1,8 @@
-package lib
+package filemanager
 
 import (
 	"io/fs"
+	"mrcli/lib/logger"
 	"os"
 )
 
@@ -18,9 +19,9 @@ func FileExists(path string) bool {
 
 func FileExistsDisplay(path string) {
 	if FileExists(path) {
-		LogSuccess(path, "OK\n", []any{})
+		logger.LogSuccess(path, "OK\n", []any{})
 	} else {
-		LogFail(path, "Missing\n", []any{})
+		logger.LogFail(path, "Missing\n", []any{})
 	}
 }
 
@@ -33,10 +34,10 @@ func FileExistsDisplayBulk(paths []string) {
 func CreateDir(dir string) {
 	if !FileExists(dir) {
 		permission := 0766
-		LogSuccess(dir, "Create directory\n", []any{})
+		logger.LogSuccess(dir, "Create directory\n", []any{})
 		os.Mkdir(dir, fs.FileMode(permission))
 	} else {
-		LogFail(dir, "Directory already exists\n", []any{})
+		logger.LogFail(dir, "Directory already exists\n", []any{})
 	}
 }
 
@@ -48,10 +49,10 @@ func CreateDirBulk(dirs []string) {
 
 func CreateFile(path string) {
 	if !FileExists(path) {
-		LogSuccess(path, "Create file\n", []any{})
+		logger.LogSuccess(path, "Create file\n", []any{})
 		os.Create(path)
 	} else {
-		LogFail(path, "File already exists\n", []any{})
+		logger.LogFail(path, "File already exists\n", []any{})
 	}
 }
 

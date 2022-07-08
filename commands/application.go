@@ -1,13 +1,17 @@
 package commands
 
-import "mrcli/lib"
+import (
+	"mrcli/lib/exec"
+	"mrcli/lib/filemanager"
+	"mrcli/lib/logger"
+)
 
 func Application(name string) {
-	lib.LogSuccess(name, "Initialize application\n", []any{})
-	lib.CreateDirBulk([]string{
+	logger.LogSuccess(name, "Initialize application\n", []any{})
+	filemanager.CreateDirBulk([]string{
 		"apps/" + name,
 		"dists/" + name,
 	})
-	lib.CreateFile("./dists/" + name + "/.keep")
-	lib.CreateGoWorkFile(name, "./apps/"+name)
+	filemanager.CreateFile("./dists/" + name + "/.keep")
+	exec.CreateGoWorkFile(name, "./apps/"+name)
 }

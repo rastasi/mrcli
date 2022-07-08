@@ -1,4 +1,4 @@
-package lib
+package config
 
 type Metadatainfo struct {
 	ProjectName string

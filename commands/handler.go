@@ -2,7 +2,8 @@ package commands
 
 import (
 	"flag"
-	"mrcli/lib"
+	"mrcli/lib/config"
+	"mrcli/lib/logger"
 )
 
 func setFlags(commandProperties []commandProperty) {
@@ -14,7 +15,7 @@ func setFlags(commandProperties []commandProperty) {
 func handle(commandProperties []commandProperty) bool {
 	for _, c := range commandProperties {
 		if c.Value != "" {
-			if c.checkConfigFile && !lib.CheckConfigFile(".") {
+			if c.checkConfigFile && !config.CheckConfigFile(".") {
 				panic("Config file not found or incorrect")
 			}
 			c.Handler(c.Value)
@@ -26,7 +27,7 @@ func handle(commandProperties []commandProperty) bool {
 
 func help() {
 	flag.VisitAll(func(f *flag.Flag) {
-		lib.Log("", "%s: %s\n", f.Name, f.Usage)
+		logger.Log("", "%s: %s\n", f.Name, f.Usage)
 	})
 }
 

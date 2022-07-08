@@ -1,16 +1,21 @@
 package commands
 
-import "mrcli/lib"
+import (
+	"mrcli/lib/config"
+	"mrcli/lib/exec"
+	"mrcli/lib/filemanager"
+	"mrcli/lib/logger"
+)
 
 func Initialize(name string) {
-	lib.LogSuccess(name, "Initialize monorepository\n", []any{})
-	lib.CreateDirBulk([]string{
+	logger.LogSuccess(name, "Initialize monorepository\n", []any{})
+	filemanager.CreateDirBulk([]string{
 		"./" + name,
 		"./" + name + "/apps",
 		"./" + name + "/libs",
 		"./" + name + "/dists",
 	})
-	lib.CreateConfigFile(name)
-	lib.CreateGoModFile(name)
-	lib.CreateGitRepo((name))
+	config.CreateConfigFile(name)
+	exec.CreateGoModFile(name)
+	exec.CreateGitRepo((name))
 }
