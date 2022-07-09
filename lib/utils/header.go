@@ -7,5 +7,5 @@ import (
 
 func Header() {
 	info := config.GetMetadata()
-	logger.Log("", "%s %s\n\n", info.Name, info.Version)
+	logger.Log(info.Name, "Version: %s\n\n", info.Version)
 }

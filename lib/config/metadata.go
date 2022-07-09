@@ -46,7 +46,7 @@ func GetMetadata() Metadatainfo {
 				"./dists/%s",
 			},
 			BaseFiles: []string{
-				"./apps/%s/.keep",
+				"./apps/%s/main.go",
 				"./dists/%s./keep",
 			},
 		},
@@ -55,7 +55,7 @@ func GetMetadata() Metadatainfo {
 				"./libs/%s",
 			},
 			BaseFiles: []string{
-				"./libs/%s/.keep",
+				"./libs/%s/main.go",
 			},
 		},
 	}
