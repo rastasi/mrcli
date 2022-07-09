@@ -1,11 +1,11 @@
 package utils
 
 import (
-	"mrcli/lib/config"
 	"mrcli/lib/logger"
+	"mrcli/lib/metadata"
 )
 
 func Header() {
-	info := config.GetMetadata()
+	info := metadata.GetMetadata()
 	logger.Log(info.Name, "Version: %s\n\n", info.Version)
 }

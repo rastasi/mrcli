@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/fs"
 	"mrcli/lib/logger"
+	"mrcli/lib/metadata"
 	"os"
 	"strings"
 )
@@ -33,7 +34,8 @@ func FileExistsDisplayBulk(paths []string, placeholders ...any) {
 	}
 }
 
-func CreateDir(dir string) {
+func CreateDir(dir string, placeholders ...any) {
+	dir = fmt.Sprintf(dir, placeholders...)
 	if !FileExists(dir) {
 		permission := 0766
 		logger.LogSuccess(dir, "Create directory\n")
@@ -45,11 +47,12 @@ func CreateDir(dir string) {
 
 func CreateDirBulk(dirs []string, placeholders ...any) {
 	for _, dir := range dirs {
-		CreateDir(fmt.Sprintf(dir, placeholders...))
+		CreateDir(dir, placeholders...)
 	}
 }
 
-func CreateFile(path string) {
+func CreateFile(path string, placeholders ...any) {
+	path = fmt.Sprintf(path, placeholders...)
 	if !FileExists(path) {
 		logger.LogSuccess(path, "Create file\n")
 		os.Create(path)
@@ -60,6 +63,17 @@ func CreateFile(path string) {
 
 func CreateFileBulk(paths []string, placeholders ...any) {
 	for _, path := range paths {
-		CreateFile(fmt.Sprintf(path, placeholders...))
+		CreateFile(path, placeholders...)
+	}
+}
+
+func BuildFromStructure(entities []metadata.StructureEntity, placeholders ...any) {
+	for _, entity := range entities {
+		switch entity.EntityType {
+		case metadata.ENTITY_TYPE_DIR:
+			CreateDir(entity.Pattern, placeholders...)
+		case metadata.ENTITY_TYPE_FILE:
+			CreateFile(entity.Pattern, placeholders...)
+		}
 	}
 }

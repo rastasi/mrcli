@@ -1,16 +1,15 @@
 package commands
 
 import (
-	"mrcli/lib/config"
 	"mrcli/lib/exec"
 	"mrcli/lib/filemanager"
 	"mrcli/lib/logger"
+	"mrcli/lib/metadata"
 )
 
-func Application(projectName string) {
-	logger.LogSuccess(projectName, "Initialize application\n")
-	info := config.GetMetadata()
-	filemanager.CreateDirBulk(info.Application.BaseDirectoryStructure, projectName)
-	filemanager.CreateFileBulk(info.Application.BaseFiles, projectName)
-	exec.CreateGoWorkFile(projectName, "./apps/"+projectName)
+func Application(appName string) {
+	logger.LogSuccess(appName, "Initialize application\n")
+	info := metadata.GetMetadata()
+	filemanager.BuildFromStructure(info.Application.Structure, appName)
+	exec.CreateGoWorkFile(appName, "./apps/"+appName)
 }

@@ -4,12 +4,22 @@ import (
 	"mrcli/lib/config"
 	"mrcli/lib/filemanager"
 	"mrcli/lib/logger"
+	"mrcli/lib/metadata"
 )
+
+func getBaseDirPatterns() []string {
+	info := metadata.GetMetadata()
+	var patterns []string
+	for _, entity := range info.Project.Structure {
+		patterns = append(patterns, entity.Pattern)
+	}
+	return patterns
+}
 
 func checkBaseDirs(projectName string) {
 	logger.Log(projectName, "Base directories")
-	info := config.GetMetadata()
-	filemanager.FileExistsDisplayBulk(info.Project.BaseDirectoryStructure, "")
+	patterns := getBaseDirPatterns()
+	filemanager.FileExistsDisplayBulk(patterns, "")
 }
 
 func checkConfigFileNilDisplay(propertyName, property string) {

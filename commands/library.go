@@ -1,16 +1,15 @@
 package commands
 
 import (
-	"mrcli/lib/config"
 	"mrcli/lib/exec"
 	"mrcli/lib/filemanager"
 	"mrcli/lib/logger"
+	"mrcli/lib/metadata"
 )
 
 func Library(libraryName string) {
 	logger.LogSuccess(libraryName, "Initialize application\n")
-	info := config.GetMetadata()
-	filemanager.CreateDirBulk(info.Library.BaseDirectoryStructure, libraryName)
-	filemanager.CreateFileBulk(info.Library.BaseFiles, libraryName)
+	info := metadata.GetMetadata()
+	filemanager.BuildFromStructure(info.Library.Structure, libraryName)
 	exec.CreateGoWorkFile(libraryName, "./libs/"+libraryName)
 }

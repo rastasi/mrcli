@@ -3,6 +3,7 @@ package config
 import (
 	"io/ioutil"
 	"mrcli/lib/filemanager"
+	"mrcli/lib/metadata"
 
 	"gopkg.in/yaml.v2"
 )
@@ -14,7 +15,7 @@ type Configfile struct {
 }
 
 func CreateConfigFile(projectName string) {
-	info := GetMetadata()
+	info := metadata.GetMetadata()
 	configData, _ := yaml.Marshal(Configfile{
 		Type:    info.Name,
 		Version: info.Version,
@@ -35,8 +36,8 @@ func LoadConfigFile(projectName string) Configfile {
 func CheckConfigFile(projectName string) bool {
 	if filemanager.FileExists(projectName + "/project.yaml") {
 		config := LoadConfigFile(projectName)
-		metadata := GetMetadata()
-		if config.Type == metadata.Name {
+		info := metadata.GetMetadata()
+		if config.Type == info.Name {
 			return true
 		}
 		return false
