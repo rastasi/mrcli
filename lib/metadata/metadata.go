@@ -1,5 +1,7 @@
 package metadata
 
+import "mrcli/lib/template"
+
 const ENTITY_TYPE_FILE = "FILE"
 const ENTITY_TYPE_DIR = "DIRECTORY"
 
@@ -78,6 +80,7 @@ func GetMetadata() Metadatainfo {
 				{
 					EntityType: ENTITY_TYPE_FILE,
 					Pattern:    "./apps/%s/main.go",
+					Template:   template.APPLICATION_MAIN,
 				},
 				{
 					EntityType: ENTITY_TYPE_FILE,
@@ -94,6 +97,7 @@ func GetMetadata() Metadatainfo {
 				{
 					EntityType: ENTITY_TYPE_FILE,
 					Pattern:    "./libs/%s/main.go",
+					Template:   template.LIBRARY_MAIN,
 				},
 			},
 		},
