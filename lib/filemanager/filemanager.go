@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"mrcli/lib/logger"
 	"os"
+	"strings"
 )
 
 func FileExists(path string) bool {
@@ -20,15 +21,15 @@ func FileExists(path string) bool {
 
 func FileExistsDisplay(path string) {
 	if FileExists(path) {
-		logger.LogSuccess(path, "OK\n")
+		logger.LogSuccess(path, "OK")
 	} else {
-		logger.LogFail(path, "Missing\n")
+		logger.LogFail(path, "Missing")
 	}
 }
 
-func FileExistsDisplayBulk(paths []string) {
+func FileExistsDisplayBulk(paths []string, placeholders ...any) {
 	for _, path := range paths {
-		FileExistsDisplay(path)
+		FileExistsDisplay(strings.ReplaceAll(fmt.Sprintf(path, placeholders...), "//", "/"))
 	}
 }
 

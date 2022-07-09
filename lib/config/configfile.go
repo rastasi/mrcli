@@ -14,10 +14,10 @@ type Configfile struct {
 }
 
 func CreateConfigFile(name string) {
-	metadata := GetMetadata()
+	info := GetMetadata()
 	configData, _ := yaml.Marshal(Configfile{
-		Type:    metadata.Name,
-		Version: metadata.Version,
+		Type:    info.Name,
+		Version: info.Version,
 		Name:    name,
 	})
 

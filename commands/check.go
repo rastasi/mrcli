@@ -8,12 +8,8 @@ import (
 
 func checkBaseDirs(name string) {
 	logger.Log(name, "Base directories")
-	filemanager.FileExistsDisplayBulk([]string{
-		name + "/project.yaml",
-		name + "/apps",
-		name + "/libs",
-		name + "/dists",
-	})
+	info := config.GetMetadata()
+	filemanager.FileExistsDisplayBulk(info.Project.BaseDirectoryStructure, "")
 }
 
 func checkConfigFileNilDisplay(propertyName, property string) {
