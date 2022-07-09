@@ -1,6 +1,7 @@
 package filemanager
 
 import (
+	"fmt"
 	"io/fs"
 	"mrcli/lib/logger"
 	"os"
@@ -19,9 +20,9 @@ func FileExists(path string) bool {
 
 func FileExistsDisplay(path string) {
 	if FileExists(path) {
-		logger.LogSuccess(path, "OK\n", []any{})
+		logger.LogSuccess(path, "OK\n")
 	} else {
-		logger.LogFail(path, "Missing\n", []any{})
+		logger.LogFail(path, "Missing\n")
 	}
 }
 
@@ -34,30 +35,30 @@ func FileExistsDisplayBulk(paths []string) {
 func CreateDir(dir string) {
 	if !FileExists(dir) {
 		permission := 0766
-		logger.LogSuccess(dir, "Create directory\n", []any{})
+		logger.LogSuccess(dir, "Create directory\n")
 		os.Mkdir(dir, fs.FileMode(permission))
 	} else {
-		logger.LogFail(dir, "Directory already exists\n", []any{})
+		logger.LogFail(dir, "Directory already exists\n")
 	}
 }
 
-func CreateDirBulk(dirs []string) {
+func CreateDirBulk(dirs []string, placeholders ...any) {
 	for _, dir := range dirs {
-		CreateDir(dir)
+		CreateDir(fmt.Sprintf(dir, placeholders...))
 	}
 }
 
 func CreateFile(path string) {
 	if !FileExists(path) {
-		logger.LogSuccess(path, "Create file\n", []any{})
+		logger.LogSuccess(path, "Create file\n")
 		os.Create(path)
 	} else {
-		logger.LogFail(path, "File already exists\n", []any{})
+		logger.LogFail(path, "File already exists\n")
 	}
 }
 
-func CreateFileBulk(paths []string) {
+func CreateFileBulk(paths []string, placeholders ...any) {
 	for _, path := range paths {
-		CreateFile(path)
+		CreateFile(fmt.Sprintf(path, placeholders...))
 	}
 }

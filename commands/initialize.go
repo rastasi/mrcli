@@ -8,14 +8,11 @@ import (
 )
 
 func Initialize(name string) {
-	logger.LogSuccess(name, "Initialize monorepository\n", []any{})
-	filemanager.CreateDirBulk([]string{
-		"./" + name,
-		"./" + name + "/apps",
-		"./" + name + "/libs",
-		"./" + name + "/dists",
-	})
+	logger.LogSuccess(name, "Initialize monorepository\n")
+	info := config.GetMetadata()
+	filemanager.CreateDirBulk(info.Project.BaseDirectoryStructure, name)
+	filemanager.CreateFileBulk(info.Project.BaseFiles, name)
 	config.CreateConfigFile(name)
 	exec.CreateGoModFile(name)
-	exec.CreateGitRepo((name))
+	exec.CreateGitRepo(name)
 }

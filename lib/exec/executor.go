@@ -12,6 +12,6 @@ func ExecuteCommand(name string, subdir string, command string, args []string) {
 	err := cmd.Run()
 	logger.Log(name, "Execute command: \"%s %s\" in \"%s\"\n", command, strings.Join(args, " "), subdir)
 	if err != nil {
-		logger.LogFail(name, err.Error()+"\n", []any{})
+		logger.LogFail(name, err.Error()+"\n")
 	}
 }
