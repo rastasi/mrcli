@@ -13,28 +13,28 @@ type Configfile struct {
 	Name    string `yaml:"name"`
 }
 
-func CreateConfigFile(name string) {
+func CreateConfigFile(projectName string) {
 	info := GetMetadata()
 	configData, _ := yaml.Marshal(Configfile{
 		Type:    info.Name,
 		Version: info.Version,
-		Name:    name,
+		Name:    projectName,
 	})
 
-	path := name + "/project.yaml"
+	path := projectName + "/project.yaml"
 	ioutil.WriteFile(path, configData, 0644)
 }
 
-func LoadConfigFile(name string) Configfile {
-	fileData, _ := ioutil.ReadFile(name + "/project.yaml")
+func LoadConfigFile(projectName string) Configfile {
+	fileData, _ := ioutil.ReadFile(projectName + "/project.yaml")
 	var config Configfile
 	yaml.Unmarshal(fileData, &config)
 	return config
 }
 
-func CheckConfigFile(name string) bool {
-	if filemanager.FileExists(name + "/project.yaml") {
-		config := LoadConfigFile(name)
+func CheckConfigFile(projectName string) bool {
+	if filemanager.FileExists(projectName + "/project.yaml") {
+		config := LoadConfigFile(projectName)
 		metadata := GetMetadata()
 		if config.Type == metadata.Name {
 			return true

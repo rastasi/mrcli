@@ -7,10 +7,10 @@ import (
 	"mrcli/lib/logger"
 )
 
-func Library(name string) {
-	logger.LogSuccess(name, "Initialize application\n")
+func Library(libraryName string) {
+	logger.LogSuccess(libraryName, "Initialize application\n")
 	info := config.GetMetadata()
-	filemanager.CreateDirBulk(info.Library.BaseDirectoryStructure, name)
-	filemanager.CreateFileBulk(info.Library.BaseFiles, name)
-	exec.CreateGoWorkFile(name, "./libs/"+name)
+	filemanager.CreateDirBulk(info.Library.BaseDirectoryStructure, libraryName)
+	filemanager.CreateFileBulk(info.Library.BaseFiles, libraryName)
+	exec.CreateGoWorkFile(libraryName, "./libs/"+libraryName)
 }

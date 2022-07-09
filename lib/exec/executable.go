@@ -1,13 +1,13 @@
 package exec
 
-func CreateGoModFile(name string) {
-	ExecuteCommand(name, name, "go", []string{"mod", "init", name})
+func CreateGoModFile(projectName string) {
+	ExecuteCommand(projectName, projectName, "go", []string{"mod", "init", projectName})
 }
 
-func CreateGoWorkFile(name string, subdir string) {
-	ExecuteCommand(name, subdir, "go", []string{"work", "init"})
+func CreateGoWorkFile(projectName string, subdir string) {
+	ExecuteCommand(projectName, subdir, "go", []string{"work", "init"})
 }
 
-func CreateGitRepo(name string) {
-	ExecuteCommand(name, name, "git", []string{"init"})
+func CreateGitRepo(projectName string) {
+	ExecuteCommand(projectName, projectName, "git", []string{"init"})
 }

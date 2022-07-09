@@ -7,11 +7,10 @@ import (
 	"mrcli/lib/logger"
 )
 
-func Application(name string) {
-	logger.LogSuccess(name, "Initialize application\n")
+func Application(projectName string) {
+	logger.LogSuccess(projectName, "Initialize application\n")
 	info := config.GetMetadata()
-	filemanager.CreateDirBulk(info.Application.BaseDirectoryStructure, name)
-	filemanager.CreateFileBulk(info.Application.BaseFiles, name)
-	filemanager.CreateFile("./dists/" + name + "/.keep")
-	exec.CreateGoWorkFile(name, "./apps/"+name)
+	filemanager.CreateDirBulk(info.Application.BaseDirectoryStructure, projectName)
+	filemanager.CreateFileBulk(info.Application.BaseFiles, projectName)
+	exec.CreateGoWorkFile(projectName, "./apps/"+projectName)
 }

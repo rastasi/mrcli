@@ -6,8 +6,8 @@ import (
 	"mrcli/lib/logger"
 )
 
-func checkBaseDirs(name string) {
-	logger.Log(name, "Base directories")
+func checkBaseDirs(projectName string) {
+	logger.Log(projectName, "Base directories")
 	info := config.GetMetadata()
 	filemanager.FileExistsDisplayBulk(info.Project.BaseDirectoryStructure, "")
 }
@@ -20,20 +20,20 @@ func checkConfigFileNilDisplay(propertyName, property string) {
 	}
 }
 
-func checkConfigFileFormat(name string) {
-	logger.Log(name, "Config file properties\n")
-	if config.CheckConfigFile(name) {
-		config := config.LoadConfigFile(name)
+func checkConfigFileFormat(projectName string) {
+	logger.Log(projectName, "Config file properties\n")
+	if config.CheckConfigFile(projectName) {
+		config := config.LoadConfigFile(projectName)
 		checkConfigFileNilDisplay("Name", config.Name)
 		checkConfigFileNilDisplay("Type", config.Type)
 		checkConfigFileNilDisplay("Version", config.Version)
 	} else {
-		logger.Log(name, "Config file not found or incorrect")
+		logger.Log(projectName, "Config file not found or incorrect")
 	}
 }
 
-func Check(name string) {
-	logger.Log(name, "Check %s\n", name)
-	checkBaseDirs(name)
-	checkConfigFileFormat(name)
+func Check(projectName string) {
+	logger.Log(projectName, "Check %s\n", projectName)
+	checkBaseDirs(projectName)
+	checkConfigFileFormat(projectName)
 }

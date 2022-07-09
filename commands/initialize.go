@@ -7,12 +7,12 @@ import (
 	"mrcli/lib/logger"
 )
 
-func Initialize(name string) {
-	logger.LogSuccess(name, "Initialize monorepository\n")
+func Initialize(projectName string) {
+	logger.LogSuccess(projectName, "Initialize monorepository\n")
 	info := config.GetMetadata()
-	filemanager.CreateDirBulk(info.Project.BaseDirectoryStructure, name)
-	filemanager.CreateFileBulk(info.Project.BaseFiles, name)
-	config.CreateConfigFile(name)
-	exec.CreateGoModFile(name)
-	exec.CreateGitRepo(name)
+	filemanager.CreateDirBulk(info.Project.BaseDirectoryStructure, projectName)
+	filemanager.CreateFileBulk(info.Project.BaseFiles, projectName)
+	config.CreateConfigFile(projectName)
+	exec.CreateGoModFile(projectName)
+	exec.CreateGitRepo(projectName)
 }
