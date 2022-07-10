@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/fs"
 	"mrcli/lib/logger"
-	"mrcli/lib/metadata"
 	"os"
 	"strings"
 )
@@ -64,29 +63,5 @@ func CreateFile(path string, placeholders ...any) {
 func CreateFileBulk(paths []string, placeholders ...any) {
 	for _, path := range paths {
 		CreateFile(path, placeholders...)
-	}
-}
-
-func WriteEntityByTemplate(entity metadata.StructureEntity, placeholders ...any) {
-	if len(entity.Template) > 0 {
-		path := fmt.Sprintf(entity.Pattern, placeholders...)
-		err := os.WriteFile(path, []byte(entity.Template), 0655)
-		if err == nil {
-			logger.LogSuccess(path, "Wrote by template")
-		} else {
-			logger.LogFail(path, err.Error())
-		}
-	}
-}
-
-func BuildFromStructure(entities []metadata.StructureEntity, placeholders ...any) {
-	for _, entity := range entities {
-		switch entity.EntityType {
-		case metadata.ENTITY_TYPE_DIR:
-			CreateDir(entity.Pattern, placeholders...)
-		case metadata.ENTITY_TYPE_FILE:
-			CreateFile(entity.Pattern, placeholders...)
-			WriteEntityByTemplate(entity, placeholders...)
-		}
 	}
 }

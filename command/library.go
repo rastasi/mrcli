@@ -1,4 +1,4 @@
-package commands
+package command
 
 import (
 	"mrcli/lib/exec"
@@ -8,7 +8,7 @@ import (
 )
 
 func Library(libraryName string) {
-	logger.LogSuccess(libraryName, "Initialize application\n")
+	logger.LogSuccess(libraryName, "Initialize library\n")
 	info := metadata.GetMetadata()
 	filemanager.BuildFromStructure(info.Library.Structure, libraryName)
 	exec.CreateGoWorkFile(libraryName, "./libs/"+libraryName)
