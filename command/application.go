@@ -2,14 +2,14 @@ package command
 
 import (
 	"mrcli/lib/exec"
-	"mrcli/lib/filemanager"
 	"mrcli/lib/logger"
 	"mrcli/lib/metadata"
+	"mrcli/lib/structure"
 )
 
 func Application(appName string) {
 	logger.LogSuccess(appName, "Initialize application\n")
 	info := metadata.GetMetadata()
-	filemanager.BuildFromStructure(info.Application.Structure, appName)
+	structure.BuildFromStructure(info.Application.Structure, appName)
 	exec.CreateGoWorkFile(appName, "./apps/"+appName)
 }

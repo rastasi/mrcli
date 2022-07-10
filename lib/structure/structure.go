@@ -1,8 +1,9 @@
-package filemanager
+package structure
 
 import (
 	"embed"
 	"fmt"
+	"mrcli/lib/filemanager"
 	"mrcli/lib/logger"
 	"mrcli/lib/metadata"
 	"os"
@@ -38,9 +39,9 @@ func BuildFromStructure(entities []metadata.StructureEntity, placeholders ...any
 	for _, entity := range entities {
 		switch entity.EntityType {
 		case metadata.ENTITY_TYPE_DIR:
-			CreateDir(entity.Pattern, placeholders...)
+			filemanager.CreateDir(entity.Pattern, placeholders...)
 		case metadata.ENTITY_TYPE_FILE:
-			CreateFile(entity.Pattern, placeholders...)
+			filemanager.CreateFile(entity.Pattern, placeholders...)
 			WriteEntityByTemplate(entity, placeholders...)
 		}
 	}
